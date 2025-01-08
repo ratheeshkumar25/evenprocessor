@@ -67,7 +67,7 @@ func NewHTTPServer(logger *logger.Logger, options ...HTTPServerOption) *HTTPServ
 // RegisterRoutes registers the API routes
 func (s *HTTPServer) RegisterRoutes(handler *handlers.EventHandler) {
 	s.router.HandleFunc("/api/events", handler.HandleEvent).Methods(http.MethodPost)
-	// Add more routes as needed
+
 }
 
 // Start starts the HTTP server
