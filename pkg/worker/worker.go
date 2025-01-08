@@ -28,7 +28,7 @@ func (w *eventWorker) Start() {
 			select {
 			case event := <-w.eventChan:
 				if err := w.useCase.SendEvent(event); err != nil {
-					// Log error here
+					//
 				}
 			case <-w.done:
 				return
