@@ -34,8 +34,6 @@ func main() {
 	httpServer := server.NewHTTPServer(
 		logger,
 		server.WithPort("8080"),
-		// Add any middleware here if needed
-		// server.WithMiddleware(middleware.Logger),
 	)
 
 	// Register routes
