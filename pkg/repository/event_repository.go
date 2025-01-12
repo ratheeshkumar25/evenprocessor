@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/ratheeshkumar/event-processor/pkg/domain"
@@ -15,11 +16,24 @@ type eventRepository struct {
 }
 
 func NewEventRepository(webhookURL string) domain.EventRepository {
+	if webhookURL == "" {
+		log.Fatal("Webhook URL cannot be empty")
+	}
+
+	log.Printf("Initializing event repository with webhook URL: %s", webhookURL)
+
 	return &eventRepository{
 		webhookURL: webhookURL,
 		client:     &http.Client{},
 	}
 }
+
+// func NewEventRepository(webhookURL string) domain.EventRepository {
+// 	return &eventRepository{
+// 		webhookURL: webhookURL,
+// 		client:     &http.Client{},
+// 	}
+// }
 
 func (r *eventRepository) SendToWebhook(event *domain.Event) error {
 	payload, err := json.Marshal(event)

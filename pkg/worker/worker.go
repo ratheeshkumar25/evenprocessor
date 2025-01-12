@@ -1,6 +1,8 @@
 package worker
 
 import (
+	"log"
+
 	"github.com/ratheeshkumar/event-processor/pkg/domain"
 )
 
@@ -28,7 +30,7 @@ func (w *eventWorker) Start() {
 			select {
 			case event := <-w.eventChan:
 				if err := w.useCase.SendEvent(event); err != nil {
-					//
+					log.Printf("Error sending event: %v", err)
 				}
 			case <-w.done:
 				return
