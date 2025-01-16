@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/ratheeshkumar/event-processor/pkg/domain"
@@ -60,5 +61,6 @@ func (uc *eventUseCase) ProcessEvent(rawEvent map[string]interface{}) (*domain.E
 }
 
 func (uc *eventUseCase) SendEvent(event *domain.Event) error {
+	log.Println("Event send ", event)
 	return uc.repo.SendToWebhook(event)
 }
